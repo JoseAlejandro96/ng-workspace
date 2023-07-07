@@ -1,0 +1,32 @@
+<form
+  class="form"
+  [ngFormOptions]="{ updateOn: 'submit' }"
+  #form="ngForm"
+  (reset)="onReset($event)"
+  (ngSubmit)="onSubmitForm($event)"
+>
+  <div class="form-field">
+    <label for="name">First Name</label>
+    <!-- TODO: appBanWords directive -->
+    <input
+      #firstName="ngModel"
+      [(ngModel)]="userInfo.firstName"
+      [required]="true"
+      [minlength]="2"
+      [appBanWords]="'test'"
+      [name]="'first-name'"
+      [type]="'text'"
+      [id]="'name'"
+      [placeholder]="'Enter your name'"
+    />
+  </div>
+
+  <div class="form-field"></div>
+</form>
+
+<div>
+  <pre>{{ formDir?.value | json }}</pre>
+</div>
+<div>
+  <pre>{{ formDir?.valid | json }}</pre>
+</div>

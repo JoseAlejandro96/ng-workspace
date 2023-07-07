@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormsModule, NgForm } from "@angular/forms";
 import { UserInfo } from "../../../core/interfaces/user-info.interface";
+import { BanWordsDirective } from "../validators/ban-word.directive";
 
 const MAYORITY_AGE = 18;
 
@@ -10,7 +11,8 @@ const MAYORITY_AGE = 18;
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    BanWordsDirective
   ],
   templateUrl: './template-forms-page.component.html',
   styleUrls: [
@@ -42,7 +44,7 @@ export class TemplateFormsPageComponent implements AfterViewInit {
   /**
    * Formulario que esta en el template que tiene la directiva de ngForm
    */
-  @ViewChild(NgForm) formDir!: NgForm;
+  @ViewChild(NgForm) formDir?: NgForm;
 
   /**
    * Valor inicial del formulario para cuando se haga un reset
@@ -76,12 +78,12 @@ export class TemplateFormsPageComponent implements AfterViewInit {
    * Cuando se hace submit en el formulario
    */
   onSubmitForm(e: SubmitEvent) {
-    if (this.formDir.invalid) return;
+    if (this.formDir?.invalid) return;
     // Strategy 1 - Reset form values, validation statuses, making controls untouched, pristine, etc
     // form.resetForm();
     // Strategy 2 - Reset only control statuses but not values.
-    this.formDir.resetForm(this.formDir.value);
-    this.initialFormValues = this.formDir.value;
+    this.formDir?.resetForm(this.formDir.value);
+    this.initialFormValues = this.formDir?.value;
     // console.log('The native submit event', e);
   }
 
@@ -90,6 +92,6 @@ export class TemplateFormsPageComponent implements AfterViewInit {
    */
   onReset(e: Event) {
     e.preventDefault();
-    this.formDir.resetForm(this.initialFormValues);
+    this.formDir?.resetForm(this.initialFormValues);
   }
 }
