@@ -24,13 +24,7 @@ export class UniqueNicknameDirective implements AsyncValidator {
     'mari',
   ]);
 
-  /**
-   * Se importa el cd: para pedir una deteccion cuando finaliza la llamada
-   * por componentes on push
-   */
-  constructor(private readonly cd: ChangeDetectorRef) { }
-
-  validate(control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> {
+  validate(control: AbstractControl): Observable<ValidationErrors | null> {
     return new Observable<ValidationErrors | null>(observer => {
       const value = control.value?.toLowerCase();
 
