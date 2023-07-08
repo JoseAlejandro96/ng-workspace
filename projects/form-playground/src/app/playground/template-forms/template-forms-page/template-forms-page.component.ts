@@ -3,6 +3,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit, V
 import { FormsModule, NgForm } from "@angular/forms";
 import { UserInfo } from "../../../core/interfaces/user-info.interface";
 import { BanWordsDirective } from "../validators/ban-word.directive";
+import { UniqueNicknameDirective } from "../validators/unique-nickname.directive";
 
 const MAYORITY_AGE = 18;
 
@@ -12,7 +13,8 @@ const MAYORITY_AGE = 18;
   imports: [
     CommonModule,
     FormsModule,
-    BanWordsDirective
+    BanWordsDirective,
+    UniqueNicknameDirective
   ],
   templateUrl: './template-forms-page.component.html',
   styleUrls: [

@@ -5,11 +5,13 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from "@an
 @Directive({
   selector: '[appBanWords]',
   standalone: true,
-  providers: [{
-    provide: NG_VALIDATORS,
-    useExisting: BanWordsDirective,
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALIDATORS,
+      useExisting: BanWordsDirective,
+      multi: true
+    }
+  ]
 })
 export class BanWordsDirective implements Validator {
 

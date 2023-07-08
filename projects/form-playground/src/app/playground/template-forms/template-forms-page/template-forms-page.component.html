@@ -7,10 +7,10 @@
 >
   <div class="form-field">
     <label for="name">First Name</label>
-    <!-- TODO: appBanWords directive -->
     <input
       #firstName="ngModel"
       [(ngModel)]="userInfo.firstName"
+      [ngModelOptions]="{ updateOn: 'blur' }"
       [required]="true"
       [minlength]="2"
       [appBanWords]="'test'"
@@ -21,7 +21,39 @@
     />
   </div>
 
-  <div class="form-field"></div>
+  <div class="form-field">
+    <label for="last-name">Last Name</label>
+    <input
+      #lastName="ngModel"
+      [(ngModel)]="userInfo.lastName"
+      [ngModelOptions]="{ updateOn: 'blur' }"
+      [required]="true"
+      [minlength]="2"
+      [name]="'last-name'"
+      [type]="'text'"
+      [id]="'last-name'"
+      [placeholder]="'Enter your last name'"
+    />
+  </div>
+
+  <div class="form-field">
+    <label for="nickname">Nickname</label>
+    <input
+      #nickname="ngModel"
+      [(ngModel)]="userInfo.nickname"
+      [ngModelOptions]="{ updateOn: 'blur' }"
+      [id]="'nickname'"
+      [name]="'nickname'"
+      [type]="'text'"
+      [placeholder]="'Come up with a nickname'"
+      pattern="^[\w.]+$"
+      [required]="true"
+      [minlength]="3"
+      appUniqueNickname
+      [appBanWords]="isAdult ? ['test', 'test_test', 'dummy'] : []"
+    />
+    <div *ngIf="nickname.pending" class="input-info">Checking...</div>
+  </div>
 </form>
 
 <div>
@@ -29,4 +61,8 @@
 </div>
 <div>
   <pre>{{ formDir?.valid | json }}</pre>
+</div>
+
+<div>
+  <pre>{{ userInfo | json }}</pre>
 </div>
