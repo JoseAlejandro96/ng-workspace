@@ -30,6 +30,7 @@ export class BanWordsDirective implements Validator {
     const foundBannedWord = this.bannedWords.find(word => word.toLocaleLowerCase() === control.value?.toLocaleLowerCase())
     return !foundBannedWord ? null : { appBanWords: { bannedWord: foundBannedWord } };
   }
+
   registerOnValidatorChange?(fn: () => void): void {
     this.onChange = fn;
   }
