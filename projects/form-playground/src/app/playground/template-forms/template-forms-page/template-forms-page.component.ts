@@ -4,6 +4,9 @@ import { FormsModule, NgForm } from "@angular/forms";
 import { UserInfo } from "../../../core/interfaces/user-info.interface";
 import { BanWordsDirective } from "../validators/ban-word.directive";
 import { UniqueNicknameDirective } from "../validators/unique-nickname.directive";
+import { PasswordShouldMatchDirective } from "../validators/password-should-match.directive";
+import { DynamicValidatorMessage } from "../../../core/dynamic-validator-message.directive";
+import { ValidatorMessageContainer } from "../../../core/input-error/validator-message-container.directive";
 
 const MAYORITY_AGE = 18;
 
@@ -14,7 +17,10 @@ const MAYORITY_AGE = 18;
     CommonModule,
     FormsModule,
     BanWordsDirective,
-    UniqueNicknameDirective
+    PasswordShouldMatchDirective,
+    UniqueNicknameDirective,
+    DynamicValidatorMessage,
+    ValidatorMessageContainer
   ],
   templateUrl: './template-forms-page.component.html',
   styleUrls: [

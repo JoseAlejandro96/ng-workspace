@@ -54,8 +54,128 @@
     />
     <div *ngIf="nickname.pending" class="input-info">Checking...</div>
   </div>
-</form>
 
+  <div class="div">
+    <label for="email">Email</label>
+    <input
+      #email="ngModel"
+      [(ngModel)]="userInfo.email"
+      [ngModelOptions]="{ updateOn: 'blur' }"
+      email
+      required
+      name="email"
+      type="email"
+      id="email"
+      placeholder="Provide your email"
+    />
+  </div>
+
+  <div class="form-field-inline-group">
+    <div class="form-field form-field--small">
+      <label for="year-of-birth">Year of birth</label>
+      <select
+        #yearOfBirth="ngModel"
+        [(ngModel)]="userInfo.yearOfBirth"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+        required
+        id="year-of-birth"
+        name="year-of-birth"
+      >
+        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+      </select>
+    </div>
+    <div class="form-field form-field--small">
+      <label for="passport">Passport Number</label>
+      <input
+        #passport="ngModel"
+        [(ngModel)]="userInfo.passport"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+        pattern="^[A-Z]{2}[0-9]{6}$"
+        [required]="isAdult"
+        name="passport"
+        type="text"
+        id="passport"
+        placeholder="Provide Passport Data"
+      />
+    </div>
+  </div>
+
+  <fieldset ngModelGroup="address">
+    <legend>Address</legend>
+    <div class="form-field">
+      <label for="full-address">Full Adress</label>
+      <input
+        #fullAdress="ngModel"
+        [(ngModel)]="userInfo.fullAdress"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+        required
+        name="full-address"
+        type="text"
+        id="full-address"
+        placeholder="Street name and house number"
+      />
+    </div>
+    <div class="form-field">
+      <label for="city">City</label>
+      <input
+        #city="ngModel"
+        [(ngModel)]="userInfo.city"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+        required
+        name="city"
+        type="text"
+        id="city"
+        placeholder="City"
+      />
+    </div>
+    <div class="form-field">
+      <label for="post-code">Post Code</label>
+      <input
+        #postCode="ngModel"
+        [(ngModel)]="userInfo.postCode"
+        [ngModelOptions]="{ updateOn: 'blur' }"
+        required
+        name="post-code"
+        type="number"
+        id="post-code"
+        placeholder="Post code"
+      />
+    </div>
+  </fieldset>
+  <fieldset ngModelGroup="password" appPasswordShouldMatch [container]="containerDir.container">
+    <legend>User Password</legend>
+    <div class="form-field">
+      <label for="password">Password</label>
+      <input
+        #password="ngModel"
+        [(ngModel)]="userInfo.password"
+        [ngModelOptions]="{ updateOn: 'change' }"
+        required
+        minlength="6"
+        name="password"
+        type="password"
+        id="password"
+        placeholder="Enter user's password"
+      />
+    </div>
+    <div class="form-field">
+      <label for="confirm-password">Confirm password</label>
+      <input
+        #confirmPassword="ngModel"
+        [(ngModel)]="userInfo.confirmPassword"
+        [ngModelOptions]="{ updateOn: 'change' }"
+        withoutValidationErrors
+        name="confirm-password"
+        type="password"
+        id="confirm-password"
+        placeholder="Confirm the password"
+      />
+      <ng-container validatorMessageContainer #containerDir="validatorMessageContainer"></ng-container>
+    </div>
+  </fieldset>
+  <button>Save</button>
+  <button type="reset" class="reset-button">Reset</button>
+</form>
 <div>
   <pre>{{ formDir?.value | json }}</pre>
 </div>
