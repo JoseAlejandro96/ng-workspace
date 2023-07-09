@@ -8,13 +8,13 @@ export const routes: Routes = [
       () => import('./playground/template-forms/template-forms-page/template-forms-page.component')
         .then(m => m.TemplateFormsPageComponent)
   },
-  // {
-  //   path: 'reactive-forms',
-  //   title: 'Reactive Forms Playground',
-  //   loadComponent:
-  //     () => import('./playgrounds/reactive-forms/reactive-forms-page/reactive-forms-page.component')
-  //       .then(m => m.ReactiveFormsPageComponent)
-  // },
+  {
+    path: 'reactive-forms',
+    title: 'Reactive Forms Playground',
+    loadComponent:
+      () => import('./playground/reactive-forms/reactive-forms-page/reactive-forms-page.component')
+        .then(m => m.ReactiveFormsPageComponent)
+  },
   // {
   //   path: 'custom-rating-picker',
   //   title: 'Custom Rating Picker Playground',

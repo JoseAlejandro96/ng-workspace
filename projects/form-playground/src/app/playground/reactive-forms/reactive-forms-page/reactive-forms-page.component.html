@@ -1,0 +1,9 @@
+<form [formGroup]="form" (reset)="onReset($event)" (ngSubmit)="onSubmit($event)" class="form"></form>
+
+<div>
+  <pre>{{ form.value | json }}</pre>
+</div>
+
+<ng-template #loading>
+  <p>Skills are loading...</p>
+</ng-template>
