@@ -10,9 +10,14 @@ export interface ErrorStateMatcherInterface {
   providedIn: 'root'
 })
 export class ErrorStateMatcher implements ErrorStateMatcherInterface {
-
   isErrorVisible(control: AbstractControl<any, any> | null, form: FormGroupDirective | NgForm | null): boolean {
     return Boolean(control && control.invalid && (control.touched || (form && form.submitted)));
   }
+}
 
+
+export class OnTouchedErrorStateMatcher implements ErrorStateMatcher {
+  isErrorVisible(control: AbstractControl | null, form: FormGroupDirective | NgForm | null) {
+    return Boolean(control && control.invalid && (control.touched || (form && form.submitted)));
+  }
 }
