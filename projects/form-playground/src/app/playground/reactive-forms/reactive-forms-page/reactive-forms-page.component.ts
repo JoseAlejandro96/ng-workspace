@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, FormRecord, ReactiveFormsModule, ValidationErrors, Validators } from "@angular/forms";
-import { Observable } from "rxjs";
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, FormRecord, ReactiveFormsModule, ValidationErrors, Validators } from "@angular/forms";
+import { Observable, Subscription, bufferCount, filter, startWith, tap } from "rxjs";
 import { DynamicValidatorMessage } from "../../../core/dynamic-validator-message.directive";
 import { OnTouchedErrorStateMatcher } from "../../../core/input-error/error-state-matcher.service";
 import { ValidatorMessageContainer } from "../../../core/input-error/validator-message-container.directive";
@@ -146,6 +146,14 @@ export class ReactiveFormsPageComponent implements OnInit, OnDestroy {
     })
   });
 
+  private ageValidators!: Subscription;
+  private formPendingState!: Subscription;
+
+  private initialFormValues: any;
+
+  @ViewChild(FormGroupDirective)
+  private formDir!: FormGroupDirective;
+
   constructor(
     private readonly userSkills: UserSkillsService,
     private readonly fb: FormBuilder,
@@ -156,21 +164,38 @@ export class ReactiveFormsPageComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.skills$ = this.userSkills.getSkills().pipe(
+      tap(skills => this.buildSkillControls(skills)),
+      tap(() => this.initialFormValues = this.form.value)
+    );
+
+    this.ageValidators = (this.form.get('yearOfBirth') as FormControl).valueChanges.pipe(
+      tap(() => (this.form.get('passport') as FormControl).markAsDirty()),
+      startWith((this.form.get('yearOfBirth') as FormControl).value)
+    ).subscribe(
+      yearOfBirth => {
+        this.isAdult(yearOfBirth)
+          ? (this.form.get('passport') as FormControl).addValidators(Validators.required)
+          : (this.form.get('passport') as FormControl).removeValidators(Validators.required);
+        (this.form.get('passport') as FormControl).updateValueAndValidity();
+      }
+    );
+
+    this.formPendingState = this.form.statusChanges.pipe(
+      bufferCount(2, 1),
+      filter(([prevState]) => prevState === 'PENDING')
+    ).subscribe(() => this.cd.markForCheck());
   }
 
   ngOnDestroy(): void {
+    this.ageValidators.unsubscribe();
+    this.formPendingState.unsubscribe();
   }
 
   get phones() {
     return this.form.get('phones') as FormArray;
   }
 
-
-
-  private getYears() {
-    const now = new Date().getUTCFullYear();
-    return Array(now - (now - 100)).fill('').map((_, idx) => now - idx);
-  }
 
 
   onSubmit(e: Event) {
@@ -195,5 +220,24 @@ export class ReactiveFormsPageComponent implements OnInit, OnDestroy {
 
   removePhone(index: number) {
     (this.form.get('phones') as FormArray)?.removeAt(index);
+  }
+
+  private getYears() {
+    const now = new Date().getUTCFullYear();
+    return Array(now - (now - 100)).fill('').map((_, idx) => now - idx);
+  }
+
+  private buildSkillControls(skills: string[]) {
+    skills.forEach(skill =>
+      (this.form.get('skills') as FormRecord).addControl(
+        skill,
+        new FormControl(false, { nonNullable: true })
+      )
+    );
+  }
+
+  private isAdult(yearOfBirth: number): boolean {
+    const currentYear = new Date().getFullYear();
+    return currentYear - yearOfBirth >= 18;
   }
 }
