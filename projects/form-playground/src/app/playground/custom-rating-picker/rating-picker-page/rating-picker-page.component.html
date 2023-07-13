@@ -2,9 +2,13 @@
   <h3>Rating Picker Component</h3>
 
   <!-- Componente Custon con control value accessor -->
-
+  <mw-rating-picker formControlName="reviewRating"></mw-rating-picker>
   <!-- Falta la directiva content editable y el formControlNale -->
-  <div class="review-textarea"></div>
+  <div class="review-textarea" contenteditable formControlName="reviewText"></div>
 
   <button>Save</button>
 </form>
+
+<div>
+  <pre>{{ form.value | json }}</pre>
+</div>
