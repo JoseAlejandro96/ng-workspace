@@ -15,12 +15,12 @@ export const routes: Routes = [
       () => import('./playground/reactive-forms/reactive-forms-page/reactive-forms-page.component')
         .then(m => m.ReactiveFormsPageComponent)
   },
-  // {
-  //   path: 'custom-rating-picker',
-  //   title: 'Custom Rating Picker Playground',
-  //   loadComponent: () => import('./playgrounds/custom-rating-picker/rating-picker-page/rating-picker-page.component')
-  //     .then(m => m.RatingPickerPageComponent)
-  // },
+  {
+    path: 'custom-rating-picker',
+    title: 'Custom Rating Picker Playground',
+    loadComponent: () => import('./playground/custom-rating-picker/rating-picker-page/rating-picker-page.component')
+      .then(m => m.RatingPickerPageComponent)
+  },
   // {
   //   path: 'custom-select',
   //   title: 'Custom Select Component Playground (Advanced)',
