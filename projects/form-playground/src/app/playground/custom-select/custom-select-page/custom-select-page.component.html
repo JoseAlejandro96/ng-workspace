@@ -1,1 +1,14 @@
-<h1>custom-select-page.component</h1>
+<store-select
+  [label]="'Pick the User'"
+  multiple="true"
+  [searchable]="true"
+  [formControl]="selectValue"
+  [displayWith]="displayWithFn"
+  [compareWith]="compareWithFn"
+  (searchChanged)="onSearchChanged($event)"
+  (closed)="onSearchChanged('')"
+>
+  <store-option *ngFor="let user of filteredUsers" [value]="user">{{
+    user.name
+  }}</store-option>
+</store-select>
