@@ -16,7 +16,9 @@
   <button *ngIf="value" class="clear-button" (click)="clearSelection($event)">
     clear
   </button>
-  <span class="drop-down-icon">👇</span>
+  <ng-container>
+    <span [appRotateAnimation]="isOpen" class="drop-down-icon">👇</span>
+  </ng-container>
 </div>
 
 <ng-template
