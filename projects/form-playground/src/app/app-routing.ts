@@ -27,10 +27,10 @@ export const routes: Routes = [
     loadComponent: () => import('./playground/custom-select/custom-select-page/custom-select-page.component')
       .then(m => m.CustomSelectPageComponent)
   },
-  // {
-  //   path: 'dynamic-forms',
-  //   title: 'Dynamic forms Playground',
-  //   loadComponent: () => import('./playgrounds/dynamic-forms/dynamic-forms-page/dynamic-forms-page.component')
-  //     .then(m => m.DynamicFormsPageComponent)
-  // }
+  {
+    path: 'dynamic-forms',
+    title: 'Dynamic forms Playground',
+    loadComponent: () => import('./playground/dynamic-forms/dynamic-forms-page/dynamic-forms-page.component')
+      .then(m => m.DynamicFormsPageComponent)
+  }
 ];
