@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve alportfolio",
+    "start forms": "ng serve form-playground",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "watch-lib": "ng build custom-form-controls --watch --configuration development",
@@ -27,6 +28,10 @@
     "@angular/platform-browser": "^16.1.5",
     "@angular/platform-browser-dynamic": "^16.1.5",
     "@angular/router": "^16.1.5",
+    "@ngrx/effects": "^16.1.0",
+    "@ngrx/entity": "^16.1.0",
+    "@ngrx/store": "^16.1.0",
+    "@ngrx/store-devtools": "^16.1.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.1"

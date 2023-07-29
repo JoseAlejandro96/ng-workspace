@@ -62,6 +62,10 @@ export class DynamicValidatorMessage implements OnInit, OnDestroy {
         }
       })
     });
+
+    fromEvent(this.elementRef.nativeElement, 'blur').subscribe((value) => {
+      console.log('blur', value);
+    })
   }
 
   ngOnDestroy(): void {

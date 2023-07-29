@@ -16,7 +16,7 @@ export class ErrorStateMatcher implements ErrorStateMatcherInterface {
 }
 
 
-export class OnTouchedErrorStateMatcher implements ErrorStateMatcher {
+export class OnTouchedErrorStateMatcher implements ErrorStateMatcherInterface {
   isErrorVisible(control: AbstractControl | null, form: FormGroupDirective | NgForm | null) {
     return Boolean(control && control.invalid && (control.touched || (form && form.submitted)));
   }

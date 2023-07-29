@@ -32,5 +32,11 @@ export const routes: Routes = [
     title: 'Dynamic forms Playground',
     loadComponent: () => import('./playground/dynamic-forms/dynamic-forms-page/dynamic-forms-page.component')
       .then(m => m.DynamicFormsPageComponent)
-  }
+  },
+  {
+    path: 'ngrx-practive',
+    title: 'NgRx Practice',
+    loadComponent: () => import('./practice/ngrx-practice/ngrx-practice.component')
+      .then(m => m.NgRxPracticeComponent)
+  },
 ];
