@@ -11,7 +11,7 @@ export interface DialogConfig {
 @Injectable()
 export class DialogService {
 
-  constructor(private overlay: Overlay, private injector: Injector) { }
+  constructor(private overlay: Overlay, private injector: Injector) {}
 
   /**
  * Open a custom component in an overlay
@@ -47,6 +47,8 @@ export class DialogService {
     // Attach component portal to the overlay
     const portal = new ComponentPortal(component, null, injector);
     overlayRef.attach(portal);
+
+    overlayRef.backdropClick().subscribe(_=> dialogRef.close())
 
     return dialogRef;
   }

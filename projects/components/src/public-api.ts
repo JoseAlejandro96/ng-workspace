@@ -12,4 +12,5 @@ export * from './lib/directives/can-color.directive';
 export * from './lib/directives/can-disable.directive';
 export * from './lib/directives/can-prevent-default.directive';
 
-
+export * from './lib/ui-components/dialog/dialog.service';
+export * from './lib/ui-components/dialog/dialog-ref';

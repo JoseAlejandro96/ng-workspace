@@ -21,3 +21,17 @@ p {
   --bg-color: rgb(249, 186, 11);
   --text-color: #333;
 }
+
+.overlay-backdrop {
+  background-color: #ffffff94;
+  z-index: 999;
+}
+
+.overlay-panel {
+  min-height: 400px;
+  min-width: 300px;
+  background-color: #ffffff;
+  opacity: 1;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  z-index: 1000;
+}
