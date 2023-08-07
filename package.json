@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve alportfolio",
-    "start forms": "ng serve form-playground",
+    "start:forms": "ng serve form-playground",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "watch-lib": "ng build custom-form-controls --watch --configuration development",

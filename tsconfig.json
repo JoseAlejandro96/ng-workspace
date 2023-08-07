@@ -4,6 +4,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
+      "components": [
+        "dist/components"
+      ],
       "custom-form-controls": ["dist/custom-form-controls"]
     },
     "outDir": "./dist/out-tsc",

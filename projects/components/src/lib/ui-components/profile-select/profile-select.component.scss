@@ -1,0 +1,42 @@
+.profile-host {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  border-radius: var(--border-radius, 10px);
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--color-background, #eceff1);
+    .selected-value {
+      transform: scale(0.9);
+    }
+  }
+
+  &.select-panel-open {
+    position: relative;
+    z-index: 1001;
+  }
+}
+
+.profile-select {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel {
+  min-width: 250px;
+  box-sizing: border-box;
+  border-radius: var(--border-radius, 10px);
+  border: var(--color-text, #ccc) solid 1px;
+  background-color: #fff;
+
+  transform-origin: top;
+  min-height: 45px;
+  overflow: auto;
+}

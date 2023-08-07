@@ -1,0 +1,59 @@
+<div class="profile-host overflow-hidden">
+  <div
+    class="profile-select"
+    [@flyInOut]="animate"
+    (@flyInOut.done)="onAnimationSlideDone($event)"
+    cdkOverlayOrigin
+    #origin="cdkOverlayOrigin"
+  >
+    <div class="image-rounded">
+      <img
+        class="w-10 h-10 rounded-full"
+        [src]="selectedUser?.imageUrl"
+        alt="Rounded avatar"
+      />
+    </div>
+    <div class="data">
+      <p class="text-sm font-medium">{{ selectedUser?.name }}</p>
+      <p class="text-xs font-light">{{ selectedUser?.email }}</p>
+    </div>
+    <div class="icon">
+      <svg
+        class="w-4 h-4 text-gray-800 dark:text-gray-700"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 14 8"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1"
+          d="m1 1 5.326 5.7a.909.909 0 0 0 1.348 0L13 1"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="isOpen"
+  [cdkConnectedOverlayOffsetY]="8"
+  [cdkConnectedOverlayOffsetX]="-11"
+  cdkConnectedOverlayHasBackdrop
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  (backdropClick)="close()"
+  (detach)="close()"
+>
+  <div class="panel" [@dropDown] (@dropDown.done)="onPanelAnimationDone($event)">
+    <ng-container *ngFor="let user of usersMocks">
+      <app-profile-select-option
+        [user]="user"
+        (selected)="onOptionSelected($event)"
+      ></app-profile-select-option>
+    </ng-container>
+  </div>
+</ng-template>
